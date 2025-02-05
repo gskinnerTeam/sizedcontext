@@ -4,21 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 extension SizedContext on BuildContext {
-  
-  double get pixelsPerInch => UniversalPlatform.isAndroid || UniversalPlatform.isIOS? 150 : 96;
-  
+  double get pixelsPerInch =>
+      UniversalPlatform.isAndroid || UniversalPlatform.isIOS ? 150 : 96;
+
   /// Returns same as MediaQuery.of(context)
   MediaQueryData get mq => MediaQuery.of(this);
 
-  /// Returns if Orientation is landscape
-  bool get isLandscape => mq.orientation == Orientation.landscape;
+  /// Returns same as MediaQuery.paddingOf(context)
+  EdgeInsets get padding => MediaQuery.paddingOf(this);
 
-  /// Returns same as MediaQuery.of(context).size
-  Size get sizePx => mq.size;
-  
+  /// Returns if Orientation is landscape
+  bool get isLandscape =>
+      MediaQuery.orientationOf(this) == Orientation.landscape;
+
+  /// Returns same as MediaQuery.sizeOf(this)
+  Size get sizePx => MediaQuery.sizeOf(this);
+
   /// Returns same as MediaQuery.of(context).size.width
   double get widthPx => sizePx.width;
-  
+
   /// Returns same as MediaQuery.of(context).height
   double get heightPx => sizePx.height;
 
@@ -45,8 +49,7 @@ extension SizedContext on BuildContext {
 
   /// Returns fraction (0-1) of screen width in pixels
   double widthPct(double fraction) => fraction * widthPx;
-  
+
   /// Returns fraction (0-1) of screen height in pixels
   double heightPct(double fraction) => fraction * heightPx;
-
 }
